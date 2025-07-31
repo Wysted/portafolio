@@ -1,0 +1,76 @@
+---
+import TechIcon from '@components/TechIcon.astro';
+const { title, description, tech = [], github, demo, image, bot_url, partner } = Astro.props;
+---
+
+<div
+    class="flex flex-col justify-between bg-white shadow-md rounded-lg p-6 border border-light hover:shadow-lg transition"
+>
+    {
+        image && (
+            <img
+                src={image}
+                alt={title}
+                class="mb-4 rounded-lg"
+            />
+        )
+    }
+
+    <h3 class="text-xl font-semibold text-primary-600 mb-2">{title}</h3>
+    <p class="text-dark mb-4">{description}</p>
+
+    <div class="flex gap-4 p-4 items-center flex-wrap">
+        {tech.map((t: string) => <TechIcon name={t} />)}
+    </div>
+
+    <div class="flex gap-4">
+        {
+            github && (
+                <a
+                    href={github}
+                    target="_blank"
+                    rel="noopener"
+                    class="text-accent-500 hover:text-accent-600 underline font-medium"
+                >
+                    GitHub
+                </a>
+            )
+        }
+        {
+            demo && (
+                <a
+                    href={demo}
+                    target="_blank"
+                    rel="noopener"
+                    class="text-primary-500 hover:text-primary-600 underline font-medium"
+                >
+                    Demo
+                </a>
+            )
+        }
+        {
+            bot_url && (
+                <a
+                    href={bot_url}
+                    target="_blank"
+                    rel="noopener"
+                    class="text-primary-500 hover:text-primary-600 underline font-medium"
+                >
+                    Discord Bot
+                </a>
+            )
+        }
+        {
+            partner && (
+                <a
+                    href={partner}
+                    target="_blank"
+                    rel="noopener"
+                    class="text-primary-300 hover:text-primary-600 underline font-medium"
+                >
+                    Compañero
+                </a>
+            )
+        }
+    </div>
+</div>

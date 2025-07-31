@@ -1,0 +1,44 @@
+@import 'tailwindcss';
+
+@theme {
+    --font-display: 'Satoshi', 'sans-serif';
+
+    --breakpoint-3xl: 120rem;
+
+    /* 🎨 Paleta tipo Laravel */
+    --color-primary-100: #ede9f8;
+    --color-primary-200: #d3bdf3;
+    --color-primary-300: #b38bea;
+    --color-primary-400: #9260e2;
+    --color-primary-500: #6f42c1; /* Laravel purple */
+    --color-primary-600: #552fa5;
+
+    --color-accent-100: #ffe5e0;
+    --color-accent-200: #ffbdb4;
+    --color-accent-300: #ff9587;
+    --color-accent-400: #ff6c5a;
+    --color-accent-500: #ff2d20; /* Laravel red accent */
+    --color-accent-600: #e32217;
+
+    --color-dark: #1f2937;
+    --color-light: #f3f4f6;
+    --color-white: #ffffff;
+
+    --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+    --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+}
+
+:root {
+    @apply font-sans;
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('/fonts/Satoshi-Variable.woff2') format('woff2');
+    font-weight: 100 900;
+    font-display: swap;
+}
+
+* {
+    font-family: 'Satoshi', sans-serif;
+}

@@ -1,0 +1,40 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ProjectLayout from '@layouts/ProjectLayout.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+const projects = [
+    {
+        title: 'Alpaca Backend',
+        description:
+            'API RESTful construida con Go y Gin-Gonic, siguiendo Clean Architecture y XP. Actualmente en desarrollo junto a un compañero de equipo.',
+        tech: ['Go', 'Gin', 'PostgreSQL', 'Redis', 'Docker', 'TypeSense'],
+        github: 'https://github.com/CPU-commits/AlpacaBackend',
+        partner: 'https://purple-sheep.com/',
+    },
+    {
+        title: 'Alpaca Frontend',
+        description:
+            'Frontend para la comunidad de tatuadores, creado con Nuxt.js. Actualmente en desarrollo junto a un compañero de equipo.',
+        tech: ['Nuxt', 'Vue'],
+        github: 'https://github.com/CPU-commits/AlpacaFront',
+        partner: 'https://purple-sheep.com/',
+    },
+    {
+        title: 'Менеджер Гильдии (Discord Bot)',
+        description:
+            'Bot de Discord para comunidades, con gestión de eventos, roles y notificaciones. ',
+        tech: ['Go', 'discordgo', 'PostgreSQL', 'Docker'],
+        github: 'https://github.com/Wysted/doc-menedzher-gil-dii',
+        bot_url: 'https://discord.com/oauth2/authorize?client_id=1362688832419397683',
+    },
+];
+---
+
+<BaseLayout>
+    <ProjectLayout
+        title="Mis proyectos"
+        subtitle="Estos son algunos de los proyectos que he desarrollado."
+    >
+        {projects.map((project) => <ProjectCard {...project} />)}
+    </ProjectLayout>
+</BaseLayout>

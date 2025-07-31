@@ -1,0 +1,32 @@
+---
+const { name } = Astro.props;
+
+const icons: Record<string, string> = {
+    Go: '/icons/go.svg',
+    Gin: '/icons/gin.png',
+    PostgreSQL: '/icons/postgresql.svg',
+    Vue: '/icons/vue.svg',
+    Nuxt: '/icons/nuxt.svg',
+    TailwindCSS: '/icons/tailwind.svg',
+    discordgo: '/icons/discord.svg',
+    FastAPI: '/icons/fastapi.svg',
+    Docker: '/icons/docker.svg',
+    Redis: '/icons/redis.svg',
+    TypeSense: '/icons/typesense.svg',
+};
+
+const src = icons[name];
+---
+
+{
+    src ? (
+        <img
+            src={src}
+            alt={name}
+            title={name}
+            class="h-8 w-8"
+        />
+    ) : (
+        <span class="text-sm bg-light text-dark px-2 py-1 rounded">{name}</span>
+    )
+}
