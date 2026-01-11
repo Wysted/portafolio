@@ -1,5 +1,5 @@
 ---
-const currentPath = Astro.url.pathname;
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 
 <nav class="fixed top-0 left-0 w-full bg-white border-b border-light shadow-sm">
