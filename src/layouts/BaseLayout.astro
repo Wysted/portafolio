@@ -4,7 +4,16 @@ import Bubbles from '@components/Bubbles.astro';
 import '@fontsource/dotgothic16';
 import '@styles/global.css';
 
-const lastUpdate = '2026.10.27';
+interface Props {
+    title?: string;
+    description?: string;
+}
+const {
+    title = 'Vladimir Besser · Backend developer',
+    description = 'Vladimir Besser, desarrollador backend: Go, Python/FastAPI, PostgreSQL y Kubernetes.',
+} = Astro.props;
+
+const lastUpdate = new Date().toISOString().slice(0, 10).replaceAll('-', '.');
 ---
 
 <html lang="es">
@@ -20,11 +29,27 @@ const lastUpdate = '2026.10.27';
             href="/favicon.svg"
         />
 
-        <title>Vladimir Besser · Backend developer</title>
+        <title>{title}</title>
+        <meta
+            name="description"
+            content={description}
+        />
+        <meta
+            property="og:title"
+            content={title}
+        />
+        <meta
+            property="og:description"
+            content={description}
+        />
+        <meta
+            property="og:type"
+            content="website"
+        />
     </head>
     <body>
         <Bubbles />
-        <div class="mx-auto max-w-195 bg-page sm:border-x sm:border-border">
+        <div class="mx-auto max-w-page bg-page sm:border-x sm:border-border">
             <header class="px-2 pt-4 text-center">
                 <h1 class="font-pixel text-[32px] leading-tight">Vladimir Besser</h1>
                 <p class="text-xs">Backend developer / Go · FastAPI · PostgreSQL</p>
@@ -40,10 +65,10 @@ const lastUpdate = '2026.10.27';
                     <button
                         id="marquee-stop"
                         type="button"
-                        class="shrink-0 cursor-pointer border border-ink bg-menu px-1 font-pixel text-xs motion-reduce:hidden"
+                        aria-pressed="false"
+                        class="hidden shrink-0 cursor-pointer border border-ink bg-menu px-1 font-pixel text-xs motion-reduce:hidden"
                     >
                         <span aria-hidden="true" id="marquee-icon">■ </span><span id="marquee-label">Detener</span>
-                        <span class="sr-only">(detener texto en movimiento)</span>
                     </button>
                 </div>
             </header>
@@ -70,10 +95,12 @@ const lastUpdate = '2026.10.27';
         <script>
             const marquee = document.getElementById('marquee');
             const stop = document.getElementById('marquee-stop');
+            stop?.classList.remove('hidden');
             stop?.addEventListener('click', () => {
                 const stopped = marquee?.classList.toggle('stopped');
                 const icon = document.getElementById('marquee-icon');
                 const label = document.getElementById('marquee-label');
+                stop.setAttribute('aria-pressed', String(stopped));
                 if (icon) icon.textContent = stopped ? '▶ ' : '■ ';
                 if (label) label.textContent = stopped ? 'Reanudar' : 'Detener';
             });

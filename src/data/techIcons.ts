@@ -1,7 +1,7 @@
 // Logos available in public/icons, shared by the 88x31 badges and the background bubbles.
 export const techIcons: Record<string, string> = {
     Go: '/icons/go.svg',
-    Gin: '/icons/gin.png',
+    Gin: '/icons/gin.svg',
     PostgreSQL: '/icons/postgresql.svg',
     Vue: '/icons/vue.svg',
     Nuxt: '/icons/nuxt.svg',

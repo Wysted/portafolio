@@ -2,7 +2,6 @@
 import TechIcon from '@components/TechIcon.astro';
 const { title, description, tech = [], github, demo, wip } = Astro.props;
 
-const main = demo ?? github;
 const links = [
     { label: 'GitHub', href: github },
     { label: 'Sitio', href: demo },
@@ -11,7 +10,7 @@ const links = [
 
 <article class="mb-4 border border-border p-2">
     <h3 class="font-bold">
-        {main ? <a href={main}>{title}</a> : title}
+        {title}
         {
             wip && (
                 <span class="ml-2 inline-block bg-accent px-1 text-xs whitespace-nowrap text-on-accent">

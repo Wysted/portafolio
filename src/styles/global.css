@@ -26,6 +26,8 @@
     --color-pc98-red: #ff0000;
     --color-pc98-blue: #0000ff;
 
+    --container-page: 780px;
+
     --font-body: 'MS PGothic', 'ＭＳ Ｐゴシック', IPAPGothic, Osaka, sans-serif;
     --font-pixel: 'DotGothic16', 'MS PGothic', 'ＭＳ Ｐゴシック', IPAPGothic, Osaka, sans-serif;
 
@@ -48,6 +50,10 @@
 }
 
 @layer base {
+    :focus-visible {
+        outline: 2px solid var(--color-link-active);
+        outline-offset: 2px;
+    }
     body {
         @apply bg-page font-body text-ink;
         font-size: 16px;
@@ -110,5 +116,6 @@
 
 /* Marquee stopped by the stop button (JS toggles .stopped) */
 .stopped {
-    animation-play-state: paused;
+    animation: none;
+    padding-left: 0;
 }
