@@ -1,44 +1,38 @@
 ---
-// src/components/Contact.astro
+import SectionBar from '@components/SectionBar.astro';
+
+const banner =
+    'inline-block h-[31px] border border-ink px-2 font-pixel text-xs leading-[29px] text-ink no-underline visited:text-ink active:text-ink';
 ---
 
-<section
-    id="contact"
-    class="w-full bg-white text-dark px-8 py-16"
->
-    <div class="max-w-xl mx-auto text-center">
-        <h2 class="text-3xl font-bold text-primary-600 mb-4">Contacto</h2>
-
-        <p class="text-lg mb-8">
-            ¿Te interesa colaborar o tienes alguna consulta? Estoy disponible para trabajar en
-            proyectos web, bots de Discord personalizados y cualquier proyecto de software.
-        </p>
-
-        <div class="flex flex-col gap-4 items-center justify-center">
-            <a
-                href="mailto:vladimirbesser@gmail.com"
-                class="text-accent-500 font-medium underline hover:text-accent-600"
-            >
-                vladimirbesser@gmail.com
-            </a>
-
-            <a
-                href="https://www.linkedin.com/in/vladimir-besser-a4898a253/"
-                target="_blank"
-                rel="noopener"
-                class="text-primary-500 font-medium underline hover:text-primary-600"
-            >
-                LinkedIn
-            </a>
-
-            <a
-                href="https://github.com/Wysted"
-                target="_blank"
-                rel="noopener"
-                class="text-dark font-medium underline hover:text-primary-500"
-            >
-                GitHub
-            </a>
-        </div>
-    </div>
+<section class="mb-4">
+    <SectionBar
+        id="contact"
+        title="Contacto"
+    />
+    <p class="mb-2">
+        ¿Te interesa colaborar o tienes alguna consulta? Estoy disponible para trabajar en APIs,
+        backends, proyectos web e infraestructura.
+    </p>
+    <p class="mb-2 flex flex-wrap gap-2">
+        <a
+            href="mailto:vladimirbesser@gmail.com"
+            class={`${banner} bg-pc98-yellow`}>Mail</a
+        >
+        <a
+            href="https://www.linkedin.com/in/vladimir-besser-a4898a253/"
+            target="_blank"
+            rel="noopener"
+            class={`${banner} bg-pc98-cyan`}>LinkedIn</a
+        >
+        <a
+            href="https://github.com/Wysted"
+            target="_blank"
+            rel="noopener"
+            class={`${banner} bg-pc98-fg`}>GitHub</a
+        >
+    </p>
+    <p>
+        [<a href="mailto:vladimirbesser@gmail.com">vladimirbesser@gmail.com</a>]
+    </p>
 </section>

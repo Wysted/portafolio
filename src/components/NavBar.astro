@@ -1,34 +1,49 @@
 ---
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+// Bullet colors cycle through the PC-98 palette (except black), like Abe's menu.
+const items = [
+    { label: 'Inicio', href: '/', bullet: 'text-pc98-red' },
+    { label: 'Perfil', href: '/#profile', bullet: 'text-pc98-green' },
+    { label: 'Proyectos', href: '/projects', bullet: 'text-pc98-cyan' },
+    { label: 'Stack', href: '/#tech', bullet: 'text-pc98-blue' },
+    { label: 'Contacto', href: '/#contact', bullet: 'text-pc98-magenta' },
+];
 ---
 
-<nav class="fixed top-0 left-0 w-full bg-white border-b border-light shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-center items-center">
-        <ul class="flex space-x-6 text-dark font-medium text-2xl">
-            <li>
-                <a
-                    href="/"
-                    class={`transition hover:text-primary-400 ${currentPath === '/' ? 'text-primary-500 font-bold' : ''}`}
-                >
-                    Inicio
-                </a>
-            </li>
-            <li>
-                <a
-                    href="/projects"
-                    class={`transition hover:text-primary-400 ${currentPath === '/projects' ? 'text-primary-500 font-bold' : ''}`}
-                >
-                    Proyectos
-                </a>
-            </li>
-            <li>
-                <a
-                    href="/#contact"
-                    class="transition hover:text-primary-400"
-                >
-                    Contacto
-                </a>
-            </li>
-        </ul>
-    </div>
+<nav
+    aria-label="Menú principal"
+    class="border-b border-border bg-menu p-2 sm:border-r sm:border-b-0 sm:p-3"
+>
+    <ul class="flex flex-wrap sm:block">
+        {
+            items.map((item) => {
+                const current = item.href === currentPath;
+                return (
+                    <li class="sm:mb-3 not-last:after:mx-1 not-last:after:content-['|'] sm:not-last:after:content-none">
+                        <span
+                            aria-hidden="true"
+                            class={`mr-1 hidden sm:inline ${item.bullet}`}
+                        >
+                            ●
+                        </span>
+                        <a
+                            href={item.href}
+                            aria-current={current ? 'page' : undefined}
+                            class={current ? 'font-bold' : ''}
+                        ><span class="font-pixel text-sm">{item.label}</span></a>
+                        {current && (
+                            <span
+                                aria-hidden="true"
+                                class="hidden sm:inline"
+                            >
+                                {' '}
+                                ◀
+                            </span>
+                        )}
+                    </li>
+                );
+            })
+        }
+    </ul>
 </nav>

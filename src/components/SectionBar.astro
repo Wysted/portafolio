@@ -1,0 +1,10 @@
+---
+const { id, title } = Astro.props;
+---
+
+<h2
+    id={id}
+    class="mb-2 bg-bar px-2 font-pixel text-base text-on-bar"
+>
+    <span aria-hidden="true">■ </span>{title}
+</h2>

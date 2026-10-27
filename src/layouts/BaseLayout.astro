@@ -1,6 +1,10 @@
 ---
 import Navbar from '@components/NavBar.astro';
+import Bubbles from '@components/Bubbles.astro';
+import '@fontsource/dotgothic16';
 import '@styles/global.css';
+
+const lastUpdate = '2026.10.27';
 ---
 
 <html lang="es">
@@ -10,13 +14,69 @@ import '@styles/global.css';
             name="viewport"
             content="width=device-width, initial-scale=1.0"
         />
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="/favicon.svg"
+        />
 
-        <title>Vladimir | Portafolio</title>
+        <title>Vladimir Besser · Backend developer</title>
     </head>
-    <body class="bg-white text-dark font-sans">
-        <Navbar />
-        <main>
-            <slot />
-        </main>
+    <body>
+        <Bubbles />
+        <div class="mx-auto max-w-195 bg-page sm:border-x sm:border-border">
+            <header class="px-2 pt-4 text-center">
+                <h1 class="font-pixel text-[32px] leading-tight">Vladimir Besser</h1>
+                <p class="text-xs">Backend developer / Go · FastAPI · PostgreSQL</p>
+                <div class="my-2 flex items-center gap-2 border-y border-rule py-1">
+                    <div class="min-w-0 flex-1 overflow-hidden">
+                        <p
+                            id="marquee"
+                            class="inline-block animate-marquee pl-[100%] whitespace-nowrap motion-reduce:animate-none motion-reduce:pl-0"
+                        >
+                            ¡Bienvenido/a!
+                        </p>
+                    </div>
+                    <button
+                        id="marquee-stop"
+                        type="button"
+                        class="shrink-0 cursor-pointer border border-ink bg-menu px-1 font-pixel text-xs motion-reduce:hidden"
+                    >
+                        <span aria-hidden="true" id="marquee-icon">■ </span><span id="marquee-label">Detener</span>
+                        <span class="sr-only">(detener texto en movimiento)</span>
+                    </button>
+                </div>
+            </header>
+            <div class="sm:grid sm:grid-cols-[150px_1fr]">
+                <Navbar />
+                <main class="min-w-0 p-2 sm:px-4">
+                    <slot />
+                </main>
+            </div>
+            <footer class="border-t border-rule px-2 py-4 text-center text-xs">
+                <p>Última actualización {lastUpdate}</p>
+                <p>En línea desde 2025.07.30</p>
+                <p>Probado en: Firefox, Chrome 1024x768</p>
+                <p>
+                    [<a
+                        href="/VladimirBesserCv.pdf"
+                        target="_blank"
+                        rel="noopener">CV (PDF)</a
+                    >]
+                </p>
+                <p>(C) 2026 Vladimir Besser</p>
+            </footer>
+        </div>
+        <script>
+            const marquee = document.getElementById('marquee');
+            const stop = document.getElementById('marquee-stop');
+            stop?.addEventListener('click', () => {
+                const stopped = marquee?.classList.toggle('stopped');
+                const icon = document.getElementById('marquee-icon');
+                const label = document.getElementById('marquee-label');
+                if (icon) icon.textContent = stopped ? '▶ ' : '■ ';
+                if (label) label.textContent = stopped ? 'Reanudar' : 'Detener';
+            });
+        </script>
     </body>
 </html>

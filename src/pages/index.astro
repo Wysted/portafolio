@@ -1,14 +1,46 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import Presentation from '@components/Presentation.astro';
+import Pc98Window from '@components/Pc98Window.astro';
+import SectionBar from '@components/SectionBar.astro';
 import AboutMe from '@components/AboutMe.astro';
+import TechIcon from '@components/TechIcon.astro';
 import Contact from '@components/Contact.astro';
+
+const stack = [
+    'Go',
+    'Gin',
+    'Python',
+    'FastAPI',
+    'LangGraph',
+    'PostgreSQL',
+    'Redis',
+    'Docker',
+    'k3s',
+    'ArgoCD',
+    'Vue',
+    'Nuxt',
+    'Astro',
+    'TailwindCSS',
+];
 ---
 
 <BaseLayout>
-    <section class="min-h-screen grid grid-cols-1 lg:grid-cols-2">
-        <Presentation />
-        <AboutMe />
+    <Pc98Window />
+
+    <hr />
+    <AboutMe />
+    <hr />
+
+    <section class="mb-4">
+        <SectionBar
+            id="tech"
+            title="Stack"
+        />
+        <p class="flex flex-wrap gap-1">
+            {stack.map((t) => <TechIcon name={t} />)}
+        </p>
     </section>
+
+    <hr />
     <Contact />
 </BaseLayout>

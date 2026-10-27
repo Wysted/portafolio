@@ -1,32 +1,34 @@
 ---
+// 88x31 CSS badge: logo square on the left, name on a solid PC-98 color on the right.
+import { techIcons } from '../data/techIcons';
+
 const { name } = Astro.props;
 
-const icons: Record<string, string> = {
-    Go: '/icons/go.svg',
-    Gin: '/icons/gin.png',
-    PostgreSQL: '/icons/postgresql.svg',
-    Vue: '/icons/vue.svg',
-    Nuxt: '/icons/nuxt.svg',
-    TailwindCSS: '/icons/tailwind.svg',
-    discordgo: '/icons/discord.svg',
-    FastAPI: '/icons/fastapi.svg',
-    Docker: '/icons/docker.svg',
-    Redis: '/icons/redis.svg',
-    TypeSense: '/icons/typesense.svg',
-};
+// Pastels measured on the reference sites (design/moodboard/NOTES.md).
+const colors = ['bg-pastel-pink', 'bg-pastel-cyan', 'bg-box', 'bg-menu'];
+const color = colors[[...name].reduce((sum, c) => sum + c.charCodeAt(0), 0) % colors.length];
 
-const src = icons[name];
+const src = techIcons[name];
 ---
 
-{
-    src ? (
-        <img
-            src={src}
-            alt={name}
-            title={name}
-            class="h-8 w-8"
-        />
-    ) : (
-        <span class="text-sm bg-light text-dark px-2 py-1 rounded">{name}</span>
-    )
-}
+<span
+    class="inline-flex h-[31px] w-[88px] overflow-hidden border border-ink align-middle"
+    title={name}
+>
+    {
+        src && (
+            <span class="flex w-[29px] shrink-0 items-center justify-center border-r border-ink bg-page">
+                <img
+                    src={src}
+                    alt=""
+                    class="h-5 w-5"
+                />
+            </span>
+        )
+    }
+    <span
+        class={`flex flex-1 items-center justify-center font-pixel text-[10px] leading-none text-ink ${color}`}
+    >
+        {name}
+    </span>
+</span>

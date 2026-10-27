@@ -1,44 +1,114 @@
 @import 'tailwindcss';
 
 @theme {
-    --font-display: 'Satoshi', 'sans-serif';
+    --color-page: #ffffff;
+    --color-ink: #000000;
+    --color-menu: #f0f0ff;
+    --color-rule: #c0c0c0;
+    --color-border: #808080;
+    --color-link: #0000ee;
+    --color-link-visited: #800080;
+    --color-link-active: #ff0000;
+    --color-bar: #000066;
+    --color-on-bar: #ffffff;
+    --color-accent: #ff8c00;
+    --color-on-accent: #000000;
+    --color-box: #ffd8a4;
+    --color-pastel-pink: #ffcaca;
+    --color-pastel-cyan: #bfffff;
+    --color-bubble: #a0e0ff;
+    --color-pc98-bg: #000000;
+    --color-pc98-fg: #ffffff;
+    --color-pc98-cyan: #00ffff;
+    --color-pc98-yellow: #ffff00;
+    --color-pc98-green: #00ff00;
+    --color-pc98-magenta: #ff00ff;
+    --color-pc98-red: #ff0000;
+    --color-pc98-blue: #0000ff;
 
-    --breakpoint-3xl: 120rem;
+    --font-body: 'MS PGothic', 'ＭＳ Ｐゴシック', IPAPGothic, Osaka, sans-serif;
+    --font-pixel: 'DotGothic16', 'MS PGothic', 'ＭＳ Ｐゴシック', IPAPGothic, Osaka, sans-serif;
 
-    /* 🎨 Paleta tipo Laravel */
-    --color-primary-100: #ede9f8;
-    --color-primary-200: #d3bdf3;
-    --color-primary-300: #b38bea;
-    --color-primary-400: #9260e2;
-    --color-primary-500: #6f42c1; /* Laravel purple */
-    --color-primary-600: #552fa5;
+    --animate-blink: blink 1s steps(1) infinite;
+    --animate-marquee: marquee 14s linear infinite;
 
-    --color-accent-100: #ffe5e0;
-    --color-accent-200: #ffbdb4;
-    --color-accent-300: #ff9587;
-    --color-accent-400: #ff6c5a;
-    --color-accent-500: #ff2d20; /* Laravel red accent */
-    --color-accent-600: #e32217;
-
-    --color-dark: #1f2937;
-    --color-light: #f3f4f6;
-    --color-white: #ffffff;
-
-    --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
-    --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+    @keyframes marquee {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(-100%);
+        }
+    }
 }
 
-:root {
-    @apply font-sans;
+@layer base {
+    body {
+        @apply bg-page font-body text-ink;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    a {
+        @apply text-link underline;
+    }
+    a:visited {
+        @apply text-link-visited;
+    }
+    a:active {
+        @apply text-link-active;
+    }
+    strong {
+        font-weight: bold;
+    }
+    hr {
+        @apply mx-auto my-4 w-4/5 border-0 border-t border-rule;
+    }
 }
 
-@font-face {
-    font-family: 'Satoshi';
-    src: url('/fonts/Satoshi-Variable.woff2') format('woff2');
-    font-weight: 100 900;
-    font-display: swap;
+/* Background bubbles (Bubbles.astro). Each one gets its random values as CSS variables. */
+.bubble {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    display: flex;
+    width: var(--size);
+    height: var(--size);
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--color-bubble);
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.6);
+    font-size: 10px;
+    animation: rise var(--duration) linear var(--delay) infinite;
+}
+.bubble img {
+    width: 55%;
+    height: 55%;
+}
+/* Travel from below the viewport to above it, relative to the bubble's own top. */
+@keyframes rise {
+    from {
+        transform: translate(0, calc(100vh - var(--y) + 80px));
+    }
+    50% {
+        transform: translate(var(--sway), calc(50vh - var(--y)));
+    }
+    to {
+        transform: translate(0, calc(-1 * var(--y) - 80px));
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .bubble {
+        animation: none;
+    }
 }
 
-* {
-    font-family: 'Satoshi', sans-serif;
+/* Marquee stopped by the stop button (JS toggles .stopped) */
+.stopped {
+    animation-play-state: paused;
 }

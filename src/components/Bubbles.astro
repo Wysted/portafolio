@@ -1,0 +1,52 @@
+---
+// Decorative bubbles with the stack's logos rising behind the page.
+// Positions, sizes and speeds are random per build, so there is no client JS.
+import { techIcons } from '../data/techIcons';
+
+// pgvector reuses the PostgreSQL logo, skip it so that logo doesn't show twice as often.
+const techs = Object.entries(techIcons).filter(([name]) => name !== 'pgvector');
+const BUBBLES = 18;
+
+const rand = (min: number, max: number) => min + Math.random() * (max - min);
+
+const bubbles = Array.from({ length: BUBBLES }, (_, i) => {
+    const [name, icon] = techs[i % techs.length];
+    const duration = rand(22, 45);
+    // Alternate sides; the gutter is what's left of the viewport around the 780px page.
+    const offset = `(50vw - 390px) * ${rand(0, 0.85).toFixed(2)}`;
+    const x = i % 2 ? `calc(${offset})` : `calc(50vw + 390px + ${offset})`;
+    return {
+        name,
+        icon,
+        style: [
+            `--size:${Math.round(rand(40, 76))}px`,
+            `--x:${x}`,
+            `--y:${rand(0, 95).toFixed(1)}vh`,
+            `--sway:${Math.round(rand(-40, 40))}px`,
+            `--duration:${duration.toFixed(1)}s`,
+            // Negative delay so bubbles are already mid-screen on load.
+            `--delay:-${rand(0, duration).toFixed(1)}s`,
+        ].join(';'),
+    };
+});
+---
+
+<div
+    aria-hidden="true"
+    class="pointer-events-none fixed inset-0 -z-10 overflow-hidden max-sm:hidden"
+>
+    {
+        bubbles.map((b) => (
+            <span
+                class="bubble"
+                style={b.style}
+                title={b.name}
+            >
+                <img
+                    src={b.icon}
+                    alt=""
+                />
+            </span>
+        ))
+    }
+</div>
