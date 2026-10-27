@@ -13,6 +13,8 @@ const {
     description = 'Vladimir Besser, desarrollador backend: Go, Python/FastAPI, PostgreSQL y Kubernetes.',
 } = Astro.props;
 
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL('/og.png', Astro.site).href;
 const lastUpdate = new Date().toISOString().slice(0, 10).replaceAll('-', '.');
 ---
 
@@ -45,6 +47,38 @@ const lastUpdate = new Date().toISOString().slice(0, 10).replaceAll('-', '.');
         <meta
             property="og:type"
             content="website"
+        />
+        <link
+            rel="canonical"
+            href={canonical}
+        />
+        <meta
+            property="og:url"
+            content={canonical}
+        />
+        <meta
+            property="og:image"
+            content={ogImage}
+        />
+        <meta
+            property="og:image:width"
+            content="1200"
+        />
+        <meta
+            property="og:image:height"
+            content="630"
+        />
+        <meta
+            property="og:image:alt"
+            content="Vladimir Besser, desarrollador backend: Go, Python, PostgreSQL y Kubernetes"
+        />
+        <meta
+            property="og:locale"
+            content="es_CL"
+        />
+        <meta
+            name="twitter:card"
+            content="summary_large_image"
         />
     </head>
     <body>

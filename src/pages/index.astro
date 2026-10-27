@@ -5,6 +5,7 @@ import SectionBar from '@components/SectionBar.astro';
 import AboutMe from '@components/AboutMe.astro';
 import TechIcon from '@components/TechIcon.astro';
 import Contact from '@components/Contact.astro';
+import { projects } from '../data/projects';
 
 const stack = [
     'Go',
@@ -22,13 +23,99 @@ const stack = [
     'Astro',
     'TailwindCSS',
 ];
+
+const jobs = [
+    {
+        period: 'nov 2025 – presente',
+        company: 'CIC',
+        role: 'Analista Programador',
+        text: 'Automatizo el envío de información y reportes entre sistemas (Python, n8n y Oracle Integration Cloud), obtengo datos de sistemas externos con web scraping y construyo herramientas internas y vistas en Streamlit y Angular.',
+    },
+    {
+        period: 'oct 2024 – ene 2025',
+        company: 'NeoHomes',
+        role: 'Desarrollador Back-End',
+        text: 'Diseñé la base de datos y la API del sistema en Go, separada en microservicios que se despliegan de forma independiente.',
+    },
+    {
+        period: '2023 – 2025',
+        company: 'Comunidad Tattoo',
+        role: 'Desarrollador Full-Stack',
+        text: 'Plataforma web para conectar tatuadores y clientes: desarrollé la API que conecta el sitio con el servidor y sumé búsqueda, caché y tareas programadas. Trabajo en pareja con otro desarrollador.',
+    },
+    {
+        period: '2020 – 2025',
+        company: 'UTEM',
+        role: 'Ingeniería en Informática',
+        text: 'Formación',
+    },
+];
 ---
 
 <BaseLayout>
     <Pc98Window />
 
     <hr />
+    <section class="mb-4">
+        <SectionBar
+            id="projects-home"
+            title="Proyectos"
+        />
+        <ul class="mb-2">
+            {
+                projects.slice(0, 3).map((p) => (
+                    <li class="mb-2">
+                        <span aria-hidden="true">● </span>
+                        <strong>{p.title}</strong> — {p.description}
+                        {[
+                            { label: 'Sitio', href: p.demo },
+                            { label: 'GitHub', href: p.github },
+                        ]
+                            .filter((l) => l.href)
+                            .map((l) => (
+                                <span class="ml-1">
+                                    [<a href={l.href} target="_blank" rel="noopener">{l.label}</a>]
+                                </span>
+                            ))}
+                    </li>
+                ))
+            }
+        </ul>
+        <p>[<a href="/projects">Ver todos los proyectos</a>]</p>
+    </section>
+
+    <hr />
     <AboutMe />
+    <hr />
+
+    <section class="mb-4">
+        <SectionBar
+            id="experience"
+            title="Experiencia"
+        />
+        <table class="w-full border-collapse border border-border text-left max-sm:block">
+            <thead class="max-sm:hidden">
+                <tr class="bg-bar text-on-bar">
+                    <th class="border border-border px-2 py-1 font-pixel text-sm font-normal">Periodo</th>
+                    <th class="border border-border px-2 py-1 font-pixel text-sm font-normal">Empresa y cargo</th>
+                    <th class="border border-border px-2 py-1 font-pixel text-sm font-normal">Qué hice</th>
+                </tr>
+            </thead>
+            <tbody class="max-sm:block">
+                {
+                    jobs.map((j) => (
+                        <tr class="align-top max-sm:mb-2 max-sm:block max-sm:border max-sm:border-border">
+                            <td class="border border-border px-2 py-1 whitespace-nowrap max-sm:block max-sm:border-0 max-sm:bg-menu max-sm:whitespace-normal">{j.period}</td>
+                            <td class="border border-border px-2 py-1 max-sm:block max-sm:border-0">
+                                <strong>{j.company}</strong> — {j.role}
+                            </td>
+                            <td class="border border-border px-2 py-1 max-sm:block max-sm:border-0">{j.text}</td>
+                        </tr>
+                    ))
+                }
+            </tbody>
+        </table>
+    </section>
     <hr />
 
     <section class="mb-4">

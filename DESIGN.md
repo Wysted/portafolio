@@ -121,13 +121,24 @@ Pixel images (badges, banners) use `image-rendering: pixelated`.
   no offset). Static under `prefers-reduced-motion` (WCAG 2.2.2).
 - **Menu**: vertical list, each item a colored `●` (cycle through the PC-98 colors except black, like
   Abe's menu) + Spanish label in DotGothic16, with `◀` on the current page:
-  Inicio / Perfil / Proyectos / Stack / Contacto.
+  Inicio / Perfil / Experiencia / Proyectos / Stack / Contacto.
 - **Section bar**: full-width `#000066` strip, white DotGothic16, prefixed with `■`.
   Minor headings use symbol frames instead: `◆◇◆ Proyectos ◆◇◆`.
 - **PC-98 window** (top page only): black box, `3px double #FFFFFF` frame, inverted title row
   (white background, black text) reading `A:\VLADIMIR`. Inside, DotGothic16 in white/cyan/yellow:
   `A>whoami` then name and role, then a blinking block cursor (`steps()` animation, off under
   reduced motion). Decorative: `aria-hidden`, since the h1 and subtitle already say the same. No profile photo anywhere.
+- **Home projects list** (`/`, right after the PC-98 window, SectionBar `Proyectos`): first 3 entries of
+  `src/data/projects.ts` as a compact list: `●` bullet, bold name, description, bracket links
+  (`[Sitio]` / `[GitHub]`), no badges; ends with `[Ver todos los proyectos]` -> `/projects`.
+- **Experience table** (home, after Perfil, SectionBar `Experiencia`): a real `<table>` (tabular data)
+  with `border-collapse`, 1px `#808080` borders and a `#000066` header row (Periodo | Empresa y cargo |
+  Qué hice), most recent first, education as the last row. Below 640px the header is hidden and each
+  row becomes a bordered block with stacked cells (no horizontal scroll).
+- **Open Graph image**: `public/og.png` (1200x630): white page with the 1px "table" border, big PC-98
+  window (`A:\VLADIMIR`, `A>whoami`, name in yellow, role in cyan/white, static cursor), navy bar with
+  `portafolio.wysted.dev` and bubble rings with stack logos. `BaseLayout` emits `og:image`, `og:url`,
+  `canonical` and `twitter:card=summary_large_image`; `site` is set in `astro.config.mjs`.
 - **Project list (Proyectos)**: no cards. Each project is a bordered block: name as plain text, one-line
   description, stack as 88x31 badges, and links in brackets: `[GitHub] [Sitio]`.
   Unfinished things get an `En construcción` label, not a hidden state.
